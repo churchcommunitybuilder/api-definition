@@ -13,7 +13,84 @@ FORMAT: 1A
 ### Group participants list [GET]
 
 + Response 200 (application/json)
-    + Attributes (array[BasicIndividualGroupsProfileWithIndividual])
+    + Attributes (array)
+        + (BasicIndividualGroupsProfileWithIndividual)
+            + group_id: 5
+            + individual_id: 1
+            + status: MEMBER
+            + individual (BasicIndividualProfile)
+                + id: 1 (number)
+                + name: Joe Tester
+                + first_name: Joe
+                + last_name: Tester
+                + phone (Phone)
+                    + mobile: +17195553939
+                    + home: +17195553938
+                + images (array)
+                    + (Image)
+                        + thumbnail: http://s3.amazon.com/thumbnail1.jpg
+                        + small: http://s3.amazon.com/small1.jpg
+                        + medium: http://s3.amazon.com/medium1.jpg
+                        + large: http://s3.amazon.com/large1.jpg
+            + actions (array)
+                + canRemoveParticipant (Action)
+                    + allowed: true (boolean)
+                    + reasons (array[string])
+                + canChangeToMember (Action)
+                    + allowed: true (boolean)
+                    + reasons (array[string])
+        + (BasicIndividualGroupsProfileWithIndividual)
+            + group_id: 5 (number)
+            + individual_id: 2 (number)
+            + status: MEMBER (string)
+            + individual (BasicIndividualProfile)
+                + id: 2 (number)
+                + name: Jane Tester
+                + first_name: Jane
+                + last_name: Tester
+                + phone (Phone)
+                    + mobile: +17195553939
+                    + home: +17195553938
+                + images (array)
+                    + (Image)
+                        + thumbnail: http://s3.amazon.com/thumbnail2.jpg
+                        + small: http://s3.amazon.com/small2.jpg
+                        + medium: http://s3.amazon.com/medium2.jpg
+                        + large: http://s3.amazon.com/large2.jpg
+            + actions (array)
+                + canRemoveParticipant (Action)
+                    + allowed: true (boolean)
+                    + reasons (array[string])
+                + canChangeToMember (Action)
+                    + allowed: true (boolean)
+                    + reasons (array[string])
+        + (BasicIndividualGroupsProfileWithIndividual)
+            + group_id: 5 (number)
+            + individual_id: 3 (number)
+            + status: LEADER (string)
+            + individual (BasicIndividualProfile)
+                + id: 3 (number)
+                + name: John Tester
+                + first_name: John
+                + last_name: Tester
+                + phone (Phone)
+                    + mobile: +17195553939
+                    + home: +17195553938
+                + images (array)
+                    + (Image)
+                        + thumbnail: http://s3.amazon.com/thumbnail3.jpg
+                        + small: http://s3.amazon.com/small3.jpg
+                        + medium: http://s3.amazon.com/medium3.jpg
+                        + large: http://s3.amazon.com/large3.jpg
+            + actions (array)
+                + canRemoveParticipant (Action)
+                    + allowed: false (boolean)
+                    + reasons (array[string])
+                        + MAIN_GROUP_LEADER
+                + canChangeToMember (Action)
+                    + allowed: false (boolean)
+                    + reasons (array[string])
+                        + MAIN_GROUP_LEADER
 
 ### Add group participants [POST /groups/{id}/participants/{action}]
 
@@ -154,7 +231,7 @@ FORMAT: 1A
                 + (Message)
                     + type: ERROR
                     + message: `Cannot change main group leader's status to member`
-        
+
 ## Data Structures
 
 ### Phone
