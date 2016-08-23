@@ -1,0 +1,214 @@
+FORMAT: 1A
+
+# Church Community Builder API
+
+
+
+## Group Participants Collection [/groups/{id}/participants]
+
++ Parameters
+    + id: `1` (number) - ID of the group
+
+
+### Group participants list [GET]
+
++ Response 200 (application/json)
+    + Attributes (array[BasicIndividualGroupsProfileWithIndividual])
+
+### Add group participants [POST /groups/{id}/participants/{action}]
+
++ Parameters
+    + id: `1` (number) - ID of the group
+    + action: `add` (string) - The action to perform
+        - Members
+            + `add`
+            + `invite`
+
++ Request (application/json)
+
+    + Attributes
+        + ids: 1,2,3 (array[number]) - The individual ids to add/invite
+        + message (string,optional) - The optional invite message to include
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicIndividualGroupsProfileWithIndividual)
+            + group_id: 5 (number)
+            + individual_id: 1 (number)
+            + status: MEMBER (string)
+            + individual (BasicIndividualProfile)
+                + id: 1 (number)
+                + name: Joe Tester
+                + first_name: Joe
+                + last_name: Tester
+                + phone (Phone)
+                    + mobile: +17195553939
+                    + home: +17195553938
+                + images (array)
+                    + (Image)
+                        + thumbnail: http://s3.amazon.com/thumbnail1.jpg
+                        + small: http://s3.amazon.com/small1.jpg
+                        + medium: http://s3.amazon.com/medium1.jpg
+                        + large: http://s3.amazon.com/large1.jpg
+        + (BasicIndividualGroupsProfileWithIndividual)
+            + group_id: 5 (number)
+            + individual_id: 2 (number)
+            + status: MEMBER (string)
+            + individual (BasicIndividualProfile)
+                + id: 2 (number)
+                + name: Jane Tester
+                + first_name: Jane
+                + last_name: Tester
+                + phone (Phone)
+                    + mobile: +17195553939
+                    + home: +17195553938
+                + images (array)
+                    + (Image)
+                        + thumbnail: http://s3.amazon.com/thumbnail2.jpg
+                        + small: http://s3.amazon.com/small2.jpg
+                        + medium: http://s3.amazon.com/medium2.jpg
+                        + large: http://s3.amazon.com/large2.jpg
+        + (BasicIndividualGroupsProfileWithIndividual)
+            + group_id: 5 (number)
+            + individual_id: 3 (number)
+            + status: MEMBER (string)
+            + individual (BasicIndividualProfile)
+                + id: 3 (number)
+                + name: John Tester
+                + first_name: John
+                + last_name: Tester
+                + phone (Phone)
+                    + mobile: +17195553939
+                    + home: +17195553938
+                + images (array)
+                    + (Image)
+                        + thumbnail: http://s3.amazon.com/thumbnail3.jpg
+                        + small: http://s3.amazon.com/small3.jpg
+                        + medium: http://s3.amazon.com/medium3.jpg
+                        + large: http://s3.amazon.com/large3.jpg
+
+### Remove group participants [DELETE]
+
++ Request (application/json)
+
+    + Attributes
+        + ids: 1,2,3 (array[number]) - The individual ids to remove
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicIndividualGroupsProfile)
+            + group_id: 5 (number)
+            + individual_id: 1 (number)
+            + status: REMOVED (string)
+            + messages (array)
+        + (BasicIndividualGroupsProfile)
+            + group_id: 5 (number)
+            + individual_id: 2 (number)
+            + status: REMOVED (string)
+            + messages (array)
+        + (BasicIndividualGroupsProfileWithAction)
+            + group_id: 5 (number)
+            + individual_id: 3 (number)
+            + status: LEADER (string)
+            + messages (array)
+            + actions (object)
+                + canRemoveParticipant (Action)
+                    + allowed: false (boolean)
+                    + reasons (array[string])
+                        + MAIN_GROUP_LEADER
+
+### Update group participants' status [PUT]
+
++ Request (application/json)
+
+    + Attributes
+        + ids: 1,2,3 (array[number]) - The individual ids to update.
+            __Note:__ The individual ids must already be in the group.
+        + status: `MEMBER` (enum) - The status to update the individual's membership
+            - Members
+                + `MEMBER`
+                + `LEADER`
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicIndividualGroupsProfile)
+            + group_id: 5 (number)
+            + individual_id: 1 (number)
+            + status: MEMBER (string)
+            + messages (array)
+        + (BasicIndividualGroupsProfile)
+            + group_id: 5 (number)
+            + individual_id: 2 (number)
+            + status: MEMBER (string)
+            + messages (array)
+        + (BasicIndividualGroupsProfileWithAction)
+            + group_id: 5 (number)
+            + individual_id: 3 (number)
+            + status: LEADER (string)
+            + actions (object)
+                + canChangeToMember (Action)
+                    + allowed: false (boolean)
+                    + reasons (array[string])
+                        + MAIN_GROUP_LEADER
+            + messages (array)
+                + (Message)
+                    + type: ERROR
+                    + message: `Cannot change main group leader's status to member`
+        
+## Data Structures
+
+### Phone
++ mobile (string)
++ home (string)
++ work (string)
+
+### Image
++ thumbnail (string)
++ small (string)
++ medium (string)
++ large (string)
+
+### Message
++ type: SUCCESS, WARNING, ERROR, INFO (enum)
++ message: SAVED (string)
+
+### Action
++ allowed (boolean)
++ reasons (array[string])
+
+### BasicIndividualProfile
++ id (number)
++ name (string) - The individual's name
++ first_name (string) - The individual's first name
++ last_name (string) - The individual's last name
++ phone (Phone)
++ images (array[Image])
+
+### IndividualProfile (BasicIndividualProfile)
++ listed (boolean)
+
+### BasicGroupProfile
++ id (number)
++ name (string)
++ description (string)
++ images (array[Image])
+
+### BasicIndividualGroupsProfile
++ individual_id (number)
++ group_id (number)
++ status: REMOVED, MEMBER, LEADER (enum)
++ messages (array[Message])
+
+### BasicIndividualGroupsProfileWithAction (BasicIndividualGroupsProfile)
++ actions (object)
+    + canPerformAction (Action)
+
+### BasicIndividualGroupsProfileWithIndividual (BasicIndividualGroupsProfileWithAction)
++ individual (BasicIndividualProfile, optional)
+
+### BasicIndividualGroupsProfileWithGroup (BasicIndividualGroupsProfileWithAction)
++ group (BasicGroupProfile, optional)
+
+### IndividualGroupsProfile (BasicIndividualGroupsProfileWithAction)
++ group (BasicGroupProfile, optional)
++ individual (BasicIndividualProfile, optional)
