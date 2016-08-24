@@ -5,11 +5,11 @@ FORMAT: 1A
 
 ## Groups
 
-+ Parameters
-    + id: `1` (number) - ID of the group
-
 
 ### Group members list [GET /groups/{id}/members]
+
++ Parameters
+    + id: `1` (number) - ID of the group
 
 + Response 200 (application/json)
     + Attributes (array)
@@ -168,8 +168,10 @@ FORMAT: 1A
 
 ### Remove group members [DELETE /groups/{id}/members]
 
-+ Request (application/json)
++ Parameters
+    + id: `1` (number) - ID of the group
 
++ Request (application/json)
     + Attributes
         + ids: 1,2,3 (array[number]) - The individual ids to remove
 
@@ -197,6 +199,9 @@ FORMAT: 1A
                         + MAIN_GROUP_LEADER
 
 ### Update group members' status [PUT /groups/{id}/members]
+
++ Parameters
+    + id: `1` (number) - ID of the group
 
 + Request (application/json)
 
