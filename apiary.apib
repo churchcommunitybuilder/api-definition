@@ -3,14 +3,13 @@ FORMAT: 1A
 # Church Community Builder API
 
 
-
-## Group Members Collection [/groups/{id}/members]
+## Groups
 
 + Parameters
     + id: `1` (number) - ID of the group
 
 
-### Group members list [GET]
+### Group members list [GET /groups/{id}/members]
 
 + Response 200 (application/json)
     + Attributes (array)
@@ -167,7 +166,7 @@ FORMAT: 1A
                         + medium: http://s3.amazon.com/medium3.jpg
                         + large: http://s3.amazon.com/large3.jpg
 
-### Remove group members [DELETE]
+### Remove group members [DELETE /groups/{id}/members]
 
 + Request (application/json)
 
@@ -197,7 +196,7 @@ FORMAT: 1A
                     + reasons (array[string])
                         + MAIN_GROUP_LEADER
 
-### Update group members' status [PUT]
+### Update group members' status [PUT /groups/{id}/members]
 
 + Request (application/json)
 
@@ -235,8 +234,9 @@ FORMAT: 1A
                     + type: ERROR
                     + message: `Cannot change main group leader's status to member`
 
+## Families
 
-## Add new family [POST /families]
+### Add new family [POST /families]
 
 + Request (application/json)
     + Attributes (FamilyProfileRequest)
@@ -245,18 +245,20 @@ FORMAT: 1A
     + Attributes (FamilyProfile)
 
 
-## Add or change family photo [POST /families/{id}/photo]
+### Add or change family photo [POST /families/{id}/photo]
 + Parameters
     + id: 1 (number) - ID of the family
 
 + Request (application/json)
     + Attributes
-        + photo
+        + photo (string)
 
 + Response 200 (application/json)
     + Attributes (BasicFamilyProfile)
 
-## Create individual [POST /individuals]
+## Individuals
+
+### Create individual [POST /individuals]
 
 + Request (application/json)
     + Attributes (IndividualProfileRequest)
@@ -265,14 +267,22 @@ FORMAT: 1A
     + Attributes (IndividualProfile)
 
 
-## Add or change individual photo [POST /individuals/{id}/photo]
+### Edit individual [PUT /individuals/{:id}]
++ Request (application/json)
+    + Attributes (IndividualProfileRequest)
+
++ Response 200 (application/json)
+    + Attributes (IndividualProfile)
+
+
+### Add or change individual photo [POST /individuals/{id}/photo]
 
 + Parameters
     + id: 1 (number) - ID of the individual
 
 + Request (application/json)
     + Attributes
-        + photo
+        + photo (string)
 
 + Response 200 (application/json)
     + Attributes (IndividualProfile)
@@ -281,43 +291,43 @@ FORMAT: 1A
 ## Data Structures
 
 ### Phone
-+ mobile (string)
++ mobile: +18888888888 (string)
 + mobile_provider (object)
-    + id
-    + name
-+ home (string)
-+ work (string)
+    + id: 5 (number)
+    + name: Verizon (string)
++ home: +18888888888 (string)
++ work: +18888888888 (string)
 
 ### PhoneRequest
-+ mobile (string)
-+ mobile_provider_id (number)
-+ home (string)
-+ work (string)
++ mobile: +18888888888 (string)
++ mobile_provider_id: 5 (number)
++ home: +18888888888 (string)
++ work: +18888888888 (string)
 
 ### Image
-+ thumbnail (string)
-+ small (string)
-+ medium (string)
-+ large (string)
++ thumbnail: http://s3.amazon.com/thumbnail1.jpg (string)
++ small: http://s3.amazon.com/small1.jpg (string)
++ medium: http://s3.amazon.com/medium1.jpg (string)
++ large: http://s3.amazon.com/large1.jpg (string)
 
 ### Message
 + type: SUCCESS, WARNING, ERROR, INFO (enum)
-+ message: SAVED (string)
++ message: `Successfully Saved` (string)
 
 ### Action
-+ allowed (boolean)
++ allowed: true (boolean)
 + reasons (array[string])
 
 ### BasicIndividualProfile
-+ id (number)
-+ name (string) - The individual's name
-+ first_name (string) - The individual's first name
-+ last_name (string) - The individual's last name
++ id: 1 (number)
++ name: First Last (string) - The individual's name
++ first_name: First (string) - The individual's first name
++ last_name: Last (string) - The individual's last name
 + phone (Phone)
 + images (array[Image])
 
 ### IndividualProfile (BasicIndividualProfile)
-+ listed (boolean)
++ listed: true (boolean)
 
 ### BasicGroupProfile
 + id (number)
@@ -326,8 +336,8 @@ FORMAT: 1A
 + images (array[Image])
 
 ### BasicIndividualGroupsProfile
-+ individual_id (number)
-+ group_id (number)
++ individual_id: 1 (number)
++ group_id: 5 (number)
 + status: REMOVED, MEMBER, LEADER (enum)
 + messages (array[Message])
 
@@ -336,10 +346,10 @@ FORMAT: 1A
     + canPerformAction (Action)
 
 ### BasicIndividualGroupsProfileWithIndividual (BasicIndividualGroupsProfileWithAction)
-+ individual (BasicIndividualProfile, optional)
++ individual (BasicIndividualProfile)
 
 ### BasicIndividualGroupsProfileWithGroup (BasicIndividualGroupsProfileWithAction)
-+ group (BasicGroupProfile, optional)
++ group (BasicGroupProfile)
 
 ### IndividualGroupsProfile (BasicIndividualGroupsProfileWithAction)
 + group (BasicGroupProfile, optional)
