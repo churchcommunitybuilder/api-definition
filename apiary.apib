@@ -2,8 +2,7 @@ FORMAT: 1A
 
 # Church Community Builder API
 
-
-## Groups
+## Group Groups
 
 These services will manage the groups domain.
 
@@ -241,7 +240,7 @@ These services will manage the groups domain.
                     + message: `Cannot change main group leader's status to member`
 
 
-## Families
+## Group Families
 
 These services will manage the family domain.
 
@@ -256,6 +255,7 @@ These services will manage the family domain.
 
 
 ### Add or change family photo [POST /families/{id}/photo]
+
 + Parameters
     + id: 1 (number) - ID of the family
 
@@ -267,7 +267,7 @@ These services will manage the family domain.
     + Attributes (BasicFamilyProfile)
 
 
-## Individuals
+## Group Individuals
 
 These services will manage the individual domain.
 
@@ -281,6 +281,10 @@ These services will manage the individual domain.
 
 
 ### Edit individual [PUT /individuals/{:id}]
+
++ Parameters
+    + id: 1 (number) - ID of the individual
+
 + Request (application/json)
     + Attributes (IndividualProfileRequest)
 
