@@ -234,71 +234,16 @@ FORMAT: 1A
                 + (Message)
                     + type: ERROR
                     + message: `Cannot change main group leader's status to member`
-                    
-                    
+
+
 ## Add new family [POST /families]
 
 + Request (application/json)
-    + Attributes
-        + id (number, optional) - Provided if this is an update to an existing family
-        + last_name (string)
-        + address (object)
-            + street (string)
-            + city (string)
-            + state (string)
-            + zip (string)
-        + message (string)
-        + members (array)
-            + (IndividualProfile)
-                + uid (string) - Useful when a new member is being added so the client can map the insert back to the new record
-                + first_name (string)
-                + last_name (string)
-                + family_position: PRIMARY_CONTACT, SPOUSE, CHILD, OTHER (enum)
-                + marital_status: NONE, SINGLE, MARRIED, WIDOWED (enum)
-                + gender: NOT_SPECIFIED, MALE, FEMALE (enum)
-                + birthday
-                + email (string)
-                + phone (object)
-                    + mobile
-                    + mobile_provider
-                + allergies (string)
-                + confirmed_no_allergies (boolean)
-                + barcode
-+ Response 200 (application/json)
-    + Attributes
-        + id (number, optional) - Provided if this is an update to an existing family
-        + last_name (string)
-        + address (object)
-            + street (string)
-            + city (string)
-            + state (string)
-            + zip (string)
-        + message (string)
-        + members (array[IndividualProfile])
-            
-## Add new family member [POST /families/{id}/members]
-
-+ Parameters
-    + id: 1 (number) - ID of the family
-    
-+ Request (application/json)
-    + Attributes (IndividualProfile)
-        + first_name (string)
-        + last_name (string)
-        + family_position: PRIMARY_CONTACT, SPOUSE, CHILD, OTHER (enum)
-        + marital_status: NONE, SINGLE, MARRIED, WIDOWED (enum)
-        + gender: NOT_SPECIFIED, MALE, FEMALE (enum)
-        + birthday
-        + email (string)
-        + phone (object)
-            + mobile
-            + mobile_provider
-        + allergies (string)
-        + confirmed_no_allergies (boolean)
-        + barcode
+    + Attributes (FamilyProfileRequest)
 
 + Response 200 (application/json)
-    + Attributes (IndividualProfile)
+    + Attributes (FamilyProfile)
+
 
 ## Add or change family photo [POST /families/{id}/photo]
 + Parameters
@@ -309,10 +254,16 @@ FORMAT: 1A
         + photo
 
 + Response 200 (application/json)
-    + Attributes (object)
-        + id
-        + message
-        + images (Image)
+    + Attributes (BasicFamilyProfile)
+
+## Create individual [POST /individuals]
+
++ Request (application/json)
+    + Attributes (IndividualProfileRequest)
+
++ Response 200 (application/json)
+    + Attributes (IndividualProfile)
+
 
 ## Add or change individual photo [POST /individuals/{id}/photo]
 
@@ -325,14 +276,21 @@ FORMAT: 1A
 
 + Response 200 (application/json)
     + Attributes (IndividualProfile)
-    
 
 
 ## Data Structures
 
-
 ### Phone
 + mobile (string)
++ mobile_provider (object)
+    + id
+    + name
++ home (string)
++ work (string)
+
+### PhoneRequest
++ mobile (string)
++ mobile_provider_id (number)
 + home (string)
 + work (string)
 
@@ -386,3 +344,54 @@ FORMAT: 1A
 ### IndividualGroupsProfile (BasicIndividualGroupsProfileWithAction)
 + group (BasicGroupProfile, optional)
 + individual (BasicIndividualProfile, optional)
+
+### IndividualProfileRequest
++ first_name (string)
++ last_name (string)
++ family_position: PRIMARY_CONTACT, SPOUSE, CHILD, OTHER (enum)
++ marital_status: NONE, SINGLE, MARRIED, WIDOWED (enum)
++ gender: NOT_SPECIFIED, MALE, FEMALE (enum)
++ birthday (string) - iso8601 without time
++ email (string)
++ phone (PhoneRequest)
++ allergies (string)
++ confirmed_no_allergies (boolean)
++ barcode
+
+### Address
++ street (string)
++ city (string)
++ state (string)
++ zip (string)
+
+### BasicFamilyProfile
++ id (number)
++ last_name (string)
++ address (Address)
++ message (string)
++ images (Image)
+
+### FamilyProfile (BasicFamilyProfile)
++ members (array[IndividualProfile])
+
+### FamilyProfileRequest
++ last_name (string)
++ address (object)
+    + street (string)
+    + city (string)
+    + state (string)
+    + zip (string)
++ message (string)
++ members (array)
+    + (IndividualProfile)
+        + first_name (string)
+        + last_name (string)
+        + family_position: PRIMARY_CONTACT, SPOUSE, CHILD, OTHER (enum)
+        + marital_status: NONE, SINGLE, MARRIED, WIDOWED (enum)
+        + gender: NOT_SPECIFIED, MALE, FEMALE (enum)
+        + birthday
+        + email (string)
+        + phone (Phone)
+        + allergies (string)
+        + confirmed_no_allergies (boolean)
+        + barcode (string)
