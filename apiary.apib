@@ -5,6 +5,7 @@ FORMAT: 1A
 
 ## Groups
 
+These services will manage the groups domain.
 
 ### Group members list [GET /groups/{id}/members]
 
@@ -239,7 +240,11 @@ FORMAT: 1A
                     + type: ERROR
                     + message: `Cannot change main group leader's status to member`
 
+
 ## Families
+
+These services will manage the family domain.
+
 
 ### Add new family [POST /families]
 
@@ -261,7 +266,10 @@ FORMAT: 1A
 + Response 200 (application/json)
     + Attributes (BasicFamilyProfile)
 
+
 ## Individuals
+
+These services will manage the individual domain.
 
 ### Create individual [POST /individuals]
 
