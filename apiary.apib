@@ -4,13 +4,13 @@ FORMAT: 1A
 
 
 
-## Group Participants Collection [/groups/{id}/participants]
+## Group Members Collection [/groups/{id}/members]
 
 + Parameters
     + id: `1` (number) - ID of the group
 
 
-### Group participants list [GET]
+### Group members list [GET]
 
 + Response 200 (application/json)
     + Attributes (array)
@@ -34,7 +34,7 @@ FORMAT: 1A
                         + large: http://s3.amazon.com/large1.jpg
             + messages (array[string])
             + actions (object)
-                + canRemoveParticipant (Action)
+                + canRemoveMember (Action)
                     + allowed: true (boolean)
                     + reasons (array[string])
                 + canChangeToMember (Action)
@@ -60,7 +60,7 @@ FORMAT: 1A
                         + large: http://s3.amazon.com/large2.jpg
             + messages (array[string])
             + actions (object)
-                + canRemoveParticipant (Action)
+                + canRemoveMember (Action)
                     + allowed: true (boolean)
                     + reasons (array[string])
                 + canChangeToMember (Action)
@@ -86,7 +86,7 @@ FORMAT: 1A
                         + large: http://s3.amazon.com/large3.jpg
             + messages (array[string])
             + actions (object)
-                + canRemoveParticipant (Action)
+                + canRemoveMember (Action)
                     + allowed: false (boolean)
                     + reasons (array[string])
                         + MAIN_GROUP_LEADER
@@ -95,7 +95,7 @@ FORMAT: 1A
                     + reasons (array[string])
                         + MAIN_GROUP_LEADER
 
-### Add group participants [POST /groups/{id}/participants/{action}]
+### Add group members [POST /groups/{id}/members/{action}]
 
 + Parameters
     + id: `1` (number) - ID of the group
@@ -167,7 +167,7 @@ FORMAT: 1A
                         + medium: http://s3.amazon.com/medium3.jpg
                         + large: http://s3.amazon.com/large3.jpg
 
-### Remove group participants [DELETE]
+### Remove group members [DELETE]
 
 + Request (application/json)
 
@@ -192,12 +192,12 @@ FORMAT: 1A
             + status: LEADER (string)
             + messages (array)
             + actions (object)
-                + canRemoveParticipant (Action)
+                + canRemoveMember (Action)
                     + allowed: false (boolean)
                     + reasons (array[string])
                         + MAIN_GROUP_LEADER
 
-### Update group participants' status [PUT]
+### Update group members' status [PUT]
 
 + Request (application/json)
 
@@ -234,8 +234,102 @@ FORMAT: 1A
                 + (Message)
                     + type: ERROR
                     + message: `Cannot change main group leader's status to member`
+                    
+                    
+## Add new family [POST /families]
+
++ Request (application/json)
+    + Attributes
+        + id (number, optional) - Provided if this is an update to an existing family
+        + last_name (string)
+        + address (object)
+            + street (string)
+            + city (string)
+            + state (string)
+            + zip (string)
+        + message (string)
+        + members (array)
+            + (IndividualProfile)
+                + uid (string) - Useful when a new member is being added so the client can map the insert back to the new record
+                + first_name (string)
+                + last_name (string)
+                + family_position: PRIMARY_CONTACT, SPOUSE, CHILD, OTHER (enum)
+                + marital_status: NONE, SINGLE, MARRIED, WIDOWED (enum)
+                + gender: NOT_SPECIFIED, MALE, FEMALE (enum)
+                + birthday
+                + email (string)
+                + phone (object)
+                    + mobile
+                    + mobile_provider
+                + allergies (string)
+                + confirmed_no_allergies (boolean)
+                + barcode
++ Response 200 (application/json)
+    + Attributes
+        + id (number, optional) - Provided if this is an update to an existing family
+        + last_name (string)
+        + address (object)
+            + street (string)
+            + city (string)
+            + state (string)
+            + zip (string)
+        + message (string)
+        + members (array[IndividualProfile])
+            
+## Add new family member [POST /families/{id}/members]
+
++ Parameters
+    + id: 1 (number) - ID of the family
+    
++ Request (application/json)
+    + Attributes (IndividualProfile)
+        + first_name (string)
+        + last_name (string)
+        + family_position: PRIMARY_CONTACT, SPOUSE, CHILD, OTHER (enum)
+        + marital_status: NONE, SINGLE, MARRIED, WIDOWED (enum)
+        + gender: NOT_SPECIFIED, MALE, FEMALE (enum)
+        + birthday
+        + email (string)
+        + phone (object)
+            + mobile
+            + mobile_provider
+        + allergies (string)
+        + confirmed_no_allergies (boolean)
+        + barcode
+
++ Response 200 (application/json)
+    + Attributes (IndividualProfile)
+
+## Add or change family photo [POST /families/{id}/photo]
++ Parameters
+    + id: 1 (number) - ID of the family
+
++ Request (application/json)
+    + Attributes
+        + photo
+
++ Response 200 (application/json)
+    + Attributes (object)
+        + id
+        + message
+        + images (Image)
+
+## Add or change individual photo [POST /individuals/{id}/photo]
+
++ Parameters
+    + id: 1 (number) - ID of the individual
+
++ Request (application/json)
+    + Attributes
+        + photo
+
++ Response 200 (application/json)
+    + Attributes (IndividualProfile)
+    
+
 
 ## Data Structures
+
 
 ### Phone
 + mobile (string)
