@@ -2,9 +2,13 @@ FORMAT: 1A
 
 # Church Community Builder API
 
-## Group Groups [/groups/{id}/members]
+# Group Groups
 
 These services will manage the groups domain.
+
+## Group members [/groups/{id}/members]
+
+These services will manage the group's members.
 
 ### Group members list [GET]
 
@@ -240,10 +244,11 @@ These services will manage the groups domain.
                     + message: `Cannot change main group leader's status to member`
 
 
-## Group Families [/families]
+# Group Families
 
 These services will manage the family domain.
 
+## Families [/families]
 
 ### Family Search [GET]
 
@@ -255,8 +260,8 @@ These services will manage the family domain.
     + page (number) - The page number
 
 + Response 200 (application/json)
-    + Attributes (array[FamilyProfile])
-        + FamilyProfile
+    + Attributes (array)
+        + (FamilyProfile)
             + id: 7 (number)
             + last_name: Last (string)
             + address (Address)
@@ -456,11 +461,13 @@ These services will manage the family domain.
             + zip: 80924 (string)
         + message: A message (string)
 
-## Group Individuals
+# Group Individuals
 
 These services will manage the individual domain.
 
-### Create individual [POST /individuals]
+# Individuals [/individuals]
+
+### Create individual [POST]
 
 + Request (application/json)
     + Attributes (IndividualProfileRequest)
@@ -500,7 +507,6 @@ These services will manage the individual domain.
         + allergies (string)
         + confirmed_no_allergies: false (boolean)
         + barcode (string)
-
 
 ### Edit individual [PUT /individuals/{id}]
 
