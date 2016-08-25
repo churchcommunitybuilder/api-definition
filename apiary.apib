@@ -250,14 +250,14 @@ These services will manage the family domain.
 
 ## Families [/families]
 
-### Family Search [GET]
+### Family Search [GET /families{?last_name}{?email}{?mobile}{?per_page}{?page}]
 
-+ Attributes
++ Parameters
     + last_name: Last (string)
     + email: test@test.com (string)
     + mobile: 7195552227 (string)
-    + per_page (number) - The number of results
-    + page (number) - The page number
+    + per_page: 10 (number) - The number of results
+    + page: 1 (number) - The page number
 
 + Response 200 (application/json)
     + Attributes (array)
