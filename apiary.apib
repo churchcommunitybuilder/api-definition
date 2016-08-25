@@ -2,11 +2,11 @@ FORMAT: 1A
 
 # Church Community Builder API
 
-## Group Groups
+## Group Groups [/groups/{id}/members]
 
 These services will manage the groups domain.
 
-### Group members list [GET /groups/{id}/members]
+### Group members list [GET]
 
 + Parameters
     + id: `1` (number) - ID of the group
@@ -166,7 +166,7 @@ These services will manage the groups domain.
                         + medium: http://s3.amazon.com/medium3.jpg
                         + large: http://s3.amazon.com/large3.jpg
 
-### Remove group members [DELETE /groups/{id}/members]
+### Remove group members [DELETE]
 
 + Parameters
     + id: `1` (number) - ID of the group
@@ -198,7 +198,7 @@ These services will manage the groups domain.
                     + reasons (array[string])
                         + MAIN_GROUP_LEADER
 
-### Update group members' status [PUT /groups/{id}/members]
+### Update group members' status [PUT]
 
 + Parameters
     + id: `1` (number) - ID of the group
@@ -249,9 +249,119 @@ These services will manage the family domain.
 
 + Request (application/json)
     + Attributes (FamilyProfileRequest)
+        + last_name: Last (string)
+        + address (Address)
+            + street: 123 Test Dr (string)
+            + city: City (string)
+            + state: CO (string)
+            + zip: 80924 (string)
+        + message: A message (string)
+        + members (array)
+            + (IndividualProfileRequest)
+                + first_name: First (string)
+                + last_name: Last (string)
+                + family_position: PRIMARY_CONTACT (string)
+                + marital_status: MARRIED (string)
+                + gender: NOT_SPECIFIED (string)
+                + birthday: 1981-03-29 (string)
+                + email: test@test.com (string)
+                + phone (PhoneRequest)
+                    + mobile: +18888888888 (string)
+                    + mobile_provider_id: 5 (number)
+                    + home: +188888888887 (string)
+                    + work: +188888888886 (string)
+                + allergies (string)
+                + confirmed_no_allergies: false (boolean)
+                + barcode (string)
+            + (IndividualProfileRequest)
+                + first_name: Jane (string)
+                + last_name: Last (string)
+                + family_position: SPOUSE (string)
+                + marital_status: MARRIED (string)
+                + gender: NOT_SPECIFIED (string)
+                + birthday (string)
+                + email: test@test.com (string)
+                + phone (PhoneRequest)
+                    + mobile: +18888888888 (string)
+                    + mobile_provider_id: 5 (number)
+                    + home: +188888888887 (string)
+                    + work: +188888888886 (string)
+                + allergies (string)
+                + confirmed_no_allergies: false (boolean)
+                + barcode (string)
+            + (IndividualProfileRequest)
+                + first_name: Child (string)
+                + last_name: Last (string)
+                + family_position: CHILD (string)
+                + marital_status: NONE (string)
+                + gender: NOT_SPECIFIED (string)
+                + birthday (string)
+                + email: test@test.com (string)
+                + allergies (string)
+                + confirmed_no_allergies: false (boolean)
+                + barcode (string)
 
 + Response 200 (application/json)
     + Attributes (FamilyProfile)
+        + id: 7 (number)
+        + last_name: Last (string)
+        + address (Address)
+            + street: 123 Test Dr (string)
+            + city: City (string)
+            + state: CO (string)
+            + zip: 80924 (string)
+        + message: A message (string)
+        + members (array)
+            + (IndividualProfile)
+                + id: 42 (number)
+                + first_name: First (string)
+                + last_name: Last (string)
+                + family_position: PRIMARY_CONTACT (string)
+                + marital_status: MARRIED (string)
+                + gender: NOT_SPECIFIED (string)
+                + birthday: 1981-03-29 (string)
+                + email: test@test.com (string)
+                + phone (Phone)
+                    + mobile: +18888888888 (string)
+                    + mobile_provider (object)
+                        + id: 5 (number)
+                        + name: Verizon (string)
+                    + home: +188888888887 (string)
+                    + work: +188888888886 (string)
+                + allergies (string)
+                + confirmed_no_allergies: false (boolean)
+                + barcode (string)
+            + (IndividualProfile)
+                + id: 43 (number)
+                + first_name: Jane (string)
+                + last_name: Last (string)
+                + family_position: SPOUSE (string)
+                + marital_status: MARRIED (string)
+                + gender: NOT_SPECIFIED (string)
+                + birthday (string)
+                + email: test@test.com (string)
+                + phone (Phone)
+                    + mobile: +18888888888 (string)
+                    + mobile_provider (object)
+                        + id: 5 (number)
+                        + name: Verizon (string)
+                    + home: +188888888887 (string)
+                    + work: +188888888886 (string)
+                + allergies (string)
+                + confirmed_no_allergies: false (boolean)
+                + barcode (string)
+            + (IndividualProfile)
+                + id: 44 (number)
+                + first_name: Child (string)
+                + last_name: Last (string)
+                + family_position: CHILD (string)
+                + marital_status: NONE (string)
+                + gender: NOT_SPECIFIED (string)
+                + birthday (string)
+                + email: test@test.com (string)
+                + allergies (string)
+                + confirmed_no_allergies: false (boolean)
+                + barcode (string)
 
 
 ### Add or change family photo [POST /families/{id}/photo]
@@ -280,7 +390,7 @@ These services will manage the individual domain.
     + Attributes (IndividualProfile)
 
 
-### Edit individual [PUT /individuals/{:id}]
+### Edit individual [PUT /individuals/{id}]
 
 + Parameters
     + id: 1 (number) - ID of the individual
@@ -312,14 +422,14 @@ These services will manage the individual domain.
 + mobile_provider (object)
     + id: 5 (number)
     + name: Verizon (string)
-+ home: +18888888888 (string)
-+ work: +18888888888 (string)
++ home: +18888888887 (string)
++ work: +18888888886 (string)
 
 ### PhoneRequest
 + mobile: +18888888888 (string)
 + mobile_provider_id: 5 (number)
-+ home: +18888888888 (string)
-+ work: +18888888888 (string)
++ home: +18888888887 (string)
++ work: +18888888886 (string)
 
 ### Image
 + thumbnail: http://s3.amazon.com/thumbnail1.jpg (string)
@@ -409,16 +519,4 @@ These services will manage the individual domain.
     + state (string)
     + zip (string)
 + message (string)
-+ members (array)
-    + (IndividualProfile)
-        + first_name (string)
-        + last_name (string)
-        + family_position: PRIMARY_CONTACT, SPOUSE, CHILD, OTHER (enum)
-        + marital_status: NONE, SINGLE, MARRIED, WIDOWED (enum)
-        + gender: NOT_SPECIFIED, MALE, FEMALE (enum)
-        + birthday
-        + email (string)
-        + phone (Phone)
-        + allergies (string)
-        + confirmed_no_allergies (boolean)
-        + barcode (string)
++ members (array[IndividualProfileRequest])
