@@ -673,6 +673,7 @@ These services will manage the individual domain.
         + confirmed_no_allergies: false (boolean)
         + barcode (string)
 
+
 ### Edit individual [PUT /individuals/{id}]
 
 + Parameters
@@ -734,6 +735,7 @@ These services will manage the individual domain.
 + Response 200 (application/json)
     + Attributes (IndividualProfile)
 
+
 ### Get an individual's groups [GET /individuals/{id}/groups]
 
 + Parameters
@@ -752,14 +754,15 @@ These services will manage the individual domain.
             + receive_sms: true (boolean)
             + group (BasicGroupProfile)
                 + id: 5 (number)
-                + name: Sunday Morning Worship Team (string)
-                + description: The worship team for sunday morning worship. (string)
+                + name: `Sunday Morning Worship Team` (string)
+                + description: `The worship team for sunday morning worship.` (string)
                 + image (Image)
                     + thumbnail: http://s3.amazon.com/thumbnail3.jpg
                     + small: http://s3.amazon.com/small3.jpg
                     + medium: http://s3.amazon.com/medium3.jpg
                     + large: http://s3.amazon.com/large3.jpg
             + messages (array)
+
 
 ### Update an individual's communication settings for a single group [PUT /individuals/{id}/groups/{group_id}]
 
@@ -781,14 +784,15 @@ These services will manage the individual domain.
         + receive_sms: true (boolean)
         + group (BasicGroupProfile)
             + id: 5 (number)
-            + name: Sunday Morning Worship Team (string)
-            + description: The worship team for sunday morning worship. (string)
+            + name: `Sunday Morning Worship Team` (string)
+            + description: `The worship team for sunday morning worship.` (string)
             + image (Image)
                 + thumbnail: http://s3.amazon.com/thumbnail3.jpg
                 + small: http://s3.amazon.com/small3.jpg
                 + medium: http://s3.amazon.com/medium3.jpg
                 + large: http://s3.amazon.com/large3.jpg
         + messages (array)
+
 
 ### Update an individual's communication settings for multiple groups [PUT /individuals/{id}/groups]
 
@@ -812,8 +816,8 @@ These services will manage the individual domain.
             + receive_sms: true (boolean)
             + group (BasicGroupProfile)
                 + id: 5 (number)
-                + name: Sunday Morning Worship Team (string)
-                + description: The worship team for sunday morning worship. (string)
+                + name: `Sunday Morning Worship Team` (string)
+                + description: `The worship team for sunday morning worship.` (string)
                 + image (Image)
                     + thumbnail: http://s3.amazon.com/thumbnail3.jpg
                     + small: http://s3.amazon.com/small3.jpg
