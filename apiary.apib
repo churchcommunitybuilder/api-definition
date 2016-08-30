@@ -33,12 +33,11 @@ These services will manage the group's members.
                 + phone (Phone)
                     + mobile: +17195553939
                     + home: +17195553938
-                + images (array)
-                    + (Image)
-                        + thumbnail: http://s3.amazon.com/thumbnail1.jpg
-                        + small: http://s3.amazon.com/small1.jpg
-                        + medium: http://s3.amazon.com/medium1.jpg
-                        + large: http://s3.amazon.com/large1.jpg
+                + image (Image)
+                    + thumbnail: http://s3.amazon.com/thumbnail1.jpg
+                    + small: http://s3.amazon.com/small1.jpg
+                    + medium: http://s3.amazon.com/medium1.jpg
+                    + large: http://s3.amazon.com/large1.jpg
             + messages (array[string])
             + actions (object)
                 + canRemoveMember (Action)
@@ -59,12 +58,11 @@ These services will manage the group's members.
                 + phone (Phone)
                     + mobile: +17195553939
                     + home: +17195553938
-                + images (array)
-                    + (Image)
-                        + thumbnail: http://s3.amazon.com/thumbnail2.jpg
-                        + small: http://s3.amazon.com/small2.jpg
-                        + medium: http://s3.amazon.com/medium2.jpg
-                        + large: http://s3.amazon.com/large2.jpg
+                + image (Image)
+                   + thumbnail: http://s3.amazon.com/thumbnail2.jpg
+                   + small: http://s3.amazon.com/small2.jpg
+                   + medium: http://s3.amazon.com/medium2.jpg
+                   + large: http://s3.amazon.com/large2.jpg
             + messages (array[string])
             + actions (object)
                 + canRemoveMember (Action)
@@ -85,12 +83,11 @@ These services will manage the group's members.
                 + phone (Phone)
                     + mobile: +17195553939
                     + home: +17195553938
-                + images (array)
-                    + (Image)
-                        + thumbnail: http://s3.amazon.com/thumbnail3.jpg
-                        + small: http://s3.amazon.com/small3.jpg
-                        + medium: http://s3.amazon.com/medium3.jpg
-                        + large: http://s3.amazon.com/large3.jpg
+                + image (Image)
+                    + thumbnail: http://s3.amazon.com/thumbnail3.jpg
+                    + small: http://s3.amazon.com/small3.jpg
+                    + medium: http://s3.amazon.com/medium3.jpg
+                    + large: http://s3.amazon.com/large3.jpg
             + messages (array[string])
             + actions (object)
                 + canRemoveMember (Action)
@@ -133,12 +130,11 @@ These services will manage the group's members.
                 + phone (Phone)
                     + mobile: +17195553939
                     + home: +17195553938
-                + images (array)
-                    + (Image)
-                        + thumbnail: http://s3.amazon.com/thumbnail1.jpg
-                        + small: http://s3.amazon.com/small1.jpg
-                        + medium: http://s3.amazon.com/medium1.jpg
-                        + large: http://s3.amazon.com/large1.jpg
+                + image (Image)
+                    + thumbnail: http://s3.amazon.com/thumbnail1.jpg
+                    + small: http://s3.amazon.com/small1.jpg
+                    + medium: http://s3.amazon.com/medium1.jpg
+                    + large: http://s3.amazon.com/large1.jpg
         + (BasicIndividualGroupsProfileWithIndividual)
             + group_id: 5 (number)
             + individual_id: 2 (number)
@@ -151,12 +147,11 @@ These services will manage the group's members.
                 + phone (Phone)
                     + mobile: +17195553939
                     + home: +17195553938
-                + images (array)
-                    + (Image)
-                        + thumbnail: http://s3.amazon.com/thumbnail2.jpg
-                        + small: http://s3.amazon.com/small2.jpg
-                        + medium: http://s3.amazon.com/medium2.jpg
-                        + large: http://s3.amazon.com/large2.jpg
+                + image (Image)
+                    + thumbnail: http://s3.amazon.com/thumbnail2.jpg
+                    + small: http://s3.amazon.com/small2.jpg
+                    + medium: http://s3.amazon.com/medium2.jpg
+                    + large: http://s3.amazon.com/large2.jpg
         + (BasicIndividualGroupsProfileWithIndividual)
             + group_id: 5 (number)
             + individual_id: 3 (number)
@@ -169,12 +164,11 @@ These services will manage the group's members.
                 + phone (Phone)
                     + mobile: +17195553939
                     + home: +17195553938
-                + images (array)
-                    + (Image)
-                        + thumbnail: http://s3.amazon.com/thumbnail3.jpg
-                        + small: http://s3.amazon.com/small3.jpg
-                        + medium: http://s3.amazon.com/medium3.jpg
-                        + large: http://s3.amazon.com/large3.jpg
+                + image (Image)
+                    + thumbnail: http://s3.amazon.com/thumbnail3.jpg
+                    + small: http://s3.amazon.com/small3.jpg
+                    + medium: http://s3.amazon.com/medium3.jpg
+                    + large: http://s3.amazon.com/large3.jpg
 
 ### Remove group members [DELETE]
 
@@ -740,6 +734,33 @@ These services will manage the individual domain.
 + Response 200 (application/json)
     + Attributes (IndividualProfile)
 
+### Get an individual's groups [GET /individuals/{id}/groups]
+
++ Parameters
+    + id: 1 (number) - ID of the individual
+
++ Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicIndividualGroupsProfileWithGroup)
+            + group_id: 5 (number)
+            + individual_id: 1 (number)
+            + status: MEMBER (string)
+            + receive_sms: true
+            + group (BasicGroupProfile)
+                + id: 5 (number)
+                + name: Sunday Morning Worship Team (string)
+                + description: The worship team for sunday morning worship. (string)
+                + image (Image)
+                    + thumbnail: http://s3.amazon.com/thumbnail3.jpg
+                    + small: http://s3.amazon.com/small3.jpg
+                    + medium: http://s3.amazon.com/medium3.jpg
+                    + large: http://s3.amazon.com/large3.jpg
+            + messages (array)
+
 
 ## Data Structures
 
@@ -777,7 +798,7 @@ These services will manage the individual domain.
 + first_name: First (string) - The individual's first name
 + last_name: Last (string) - The individual's last name
 + phone (Phone)
-+ images (array[Image])
++ image (Image)
 
 ### IndividualProfile (BasicIndividualProfile)
 + listed: true (boolean)
@@ -786,12 +807,13 @@ These services will manage the individual domain.
 + id (number)
 + name (string)
 + description (string)
-+ images (array[Image])
++ image (Image)
 
 ### BasicIndividualGroupsProfile
 + individual_id: 1 (number)
 + group_id: 5 (number)
 + status: REMOVED, MEMBER, LEADER (enum)
++ receive_sms: true (boolean)
 + messages (array[Message])
 
 ### BasicIndividualGroupsProfileWithAction (BasicIndividualGroupsProfile)
@@ -835,7 +857,7 @@ These services will manage the individual domain.
 + last_name (string)
 + address (Address)
 + message (string)
-+ images (Image)
++ image (Image)
 + messages (array[Message])
 
 ### FamilyProfile (BasicFamilyProfile)
