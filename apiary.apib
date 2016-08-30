@@ -15,6 +15,10 @@ These services will manage the group's members.
 + Parameters
     + id: `1` (number) - ID of the group
 
++ Request
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
 + Response 200 (application/json)
     + Attributes (array)
         + (BasicIndividualGroupsProfileWithIndividual)
@@ -108,6 +112,8 @@ These services will manage the group's members.
             + `invite`
 
 + Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
 
     + Attributes
         + ids: 1,2,3 (array[number]) - The individual ids to add/invite
@@ -208,6 +214,8 @@ These services will manage the group's members.
     + id: `1` (number) - ID of the group
 
 + Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
 
     + Attributes
         + ids: 1,2,3 (array[number]) - The individual ids to update.
@@ -258,6 +266,10 @@ These services will manage the family domain.
     + mobile: 7195552227 (string)
     + per_page: 10 (number) - The number of results
     + page: 1 (number) - The page number
+
++ Request
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
 
 + Response 200 (application/json)
     + Attributes (array)
@@ -327,6 +339,10 @@ These services will manage the family domain.
 + Parameters
     + id: 7 (number) - The family ID
 
++ Request
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
 + Response 200 (application/json)
     + Attributes (FamilyProfile)
         + id: 7 (number)
@@ -393,6 +409,8 @@ These services will manage the family domain.
 ### Add new family [POST]
 
 + Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
     + Attributes (FamilyProfileRequest)
         + last_name: Last (string)
         + address (Address)
@@ -515,6 +533,8 @@ These services will manage the family domain.
     + id: 7 (number) - The family ID
 
 + Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
     + Attributes (BasicFamilyProfileRequest)
         + last_name: Last (string)
         + address (Address)
@@ -593,6 +613,8 @@ These services will manage the family domain.
     + id: 1 (number) - ID of the family
 
 + Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
     + Attributes
         + photo: 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 (string)
 
@@ -616,6 +638,8 @@ These services will manage the individual domain.
 ### Create individual [POST]
 
 + Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
     + Attributes (CreateIndividualProfileRequest)
         + first_name: First (string)
         + last_name: Last (string)
@@ -661,6 +685,8 @@ These services will manage the individual domain.
     + id: 1 (number) - ID of the individual
 
 + Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
     + Attributes (IndividualProfileRequest)
         + first_name: First (string)
         + last_name: Last (string)
@@ -706,6 +732,8 @@ These services will manage the individual domain.
     + id: 1 (number) - ID of the individual
 
 + Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
     + Attributes
         + photo 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 (string)
 
