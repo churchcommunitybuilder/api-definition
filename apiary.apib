@@ -246,6 +246,96 @@ These services will manage the group's members.
                     + message: `Cannot change main group leader's status to member`
 
 
+### Get an individual's groups [GET /individuals/{id}/groups]
+
++ Parameters
+    + id: 1 (number) - ID of the individual
+
++ Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicIndividualGroupsProfileWithGroup)
+            + group_id: 5 (number)
+            + individual_id: 1 (number)
+            + status: MEMBER (string)
+            + receive_sms: true (boolean)
+            + group (BasicGroupProfile)
+                + id: 5 (number)
+                + name: `Sunday Morning Worship Team` (string)
+                + description: `The worship team for sunday morning worship.` (string)
+                + image (Image)
+                    + thumbnail: http://s3.amazon.com/thumbnail3.jpg
+                    + small: http://s3.amazon.com/small3.jpg
+                    + medium: http://s3.amazon.com/medium3.jpg
+                    + large: http://s3.amazon.com/large3.jpg
+            + messages (array)
+
+
+### Update an individual's communication settings for a single group [PUT /individuals/{id}/groups/{group_id}]
+
++ Parameters
+    + id: 1 (number) - ID of the individual
+    + group_id: 5 (number) - ID of the group
+
++ Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+    + Attributes (IndividualGroupsRequest)
+        + receive_sms: true (boolean)
+
++ Response 200 (application/json)
+    + Attributes (BasicIndividualGroupsProfileWithGroup)
+        + group_id: 5 (number)
+        + individual_id: 1 (number)
+        + status: MEMBER (string)
+        + receive_sms: true (boolean)
+        + group (BasicGroupProfile)
+            + id: 5 (number)
+            + name: `Sunday Morning Worship Team` (string)
+            + description: `The worship team for sunday morning worship.` (string)
+            + image (Image)
+                + thumbnail: http://s3.amazon.com/thumbnail3.jpg
+                + small: http://s3.amazon.com/small3.jpg
+                + medium: http://s3.amazon.com/medium3.jpg
+                + large: http://s3.amazon.com/large3.jpg
+        + messages (array)
+
+
+### Update an individual's communication settings for multiple groups [PUT /individuals/{id}/groups]
+
++ Parameters
+    + id: 1 (number) - ID of the individual
+
++ Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+    + Attributes (array)
+        + (IndividualGroupsRequestWithId)
+            + id: 5 (number) - group_id
+            + receive_sms: true (boolean)
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicIndividualGroupsProfileWithGroup)
+            + group_id: 5 (number)
+            + individual_id: 1 (number)
+            + status: MEMBER (string)
+            + receive_sms: true (boolean)
+            + group (BasicGroupProfile)
+                + id: 5 (number)
+                + name: `Sunday Morning Worship Team` (string)
+                + description: `The worship team for sunday morning worship.` (string)
+                + image (Image)
+                    + thumbnail: http://s3.amazon.com/thumbnail3.jpg
+                    + small: http://s3.amazon.com/small3.jpg
+                    + medium: http://s3.amazon.com/medium3.jpg
+                    + large: http://s3.amazon.com/large3.jpg
+            + messages (array)
+
+
 # Group Families
 
 These services will manage the family domain.
@@ -734,96 +824,6 @@ These services will manage the individual domain.
 
 + Response 200 (application/json)
     + Attributes (IndividualProfile)
-
-
-### Get an individual's groups [GET /individuals/{id}/groups]
-
-+ Parameters
-    + id: 1 (number) - ID of the individual
-
-+ Request (application/json)
-    + Headers
-        Accept: application/vnd.ccbchurch.v2+json
-
-+ Response 200 (application/json)
-    + Attributes (array)
-        + (BasicIndividualGroupsProfileWithGroup)
-            + group_id: 5 (number)
-            + individual_id: 1 (number)
-            + status: MEMBER (string)
-            + receive_sms: true (boolean)
-            + group (BasicGroupProfile)
-                + id: 5 (number)
-                + name: `Sunday Morning Worship Team` (string)
-                + description: `The worship team for sunday morning worship.` (string)
-                + image (Image)
-                    + thumbnail: http://s3.amazon.com/thumbnail3.jpg
-                    + small: http://s3.amazon.com/small3.jpg
-                    + medium: http://s3.amazon.com/medium3.jpg
-                    + large: http://s3.amazon.com/large3.jpg
-            + messages (array)
-
-
-### Update an individual's communication settings for a single group [PUT /individuals/{id}/groups/{group_id}]
-
-+ Parameters
-    + id: 1 (number) - ID of the individual
-    + group_id: 5 (number) - ID of the group
-
-+ Request (application/json)
-    + Headers
-        Accept: application/vnd.ccbchurch.v2+json
-    + Attributes (IndividualGroupsRequest)
-        + receive_sms: true (boolean)
-
-+ Response 200 (application/json)
-    + Attributes (BasicIndividualGroupsProfileWithGroup)
-        + group_id: 5 (number)
-        + individual_id: 1 (number)
-        + status: MEMBER (string)
-        + receive_sms: true (boolean)
-        + group (BasicGroupProfile)
-            + id: 5 (number)
-            + name: `Sunday Morning Worship Team` (string)
-            + description: `The worship team for sunday morning worship.` (string)
-            + image (Image)
-                + thumbnail: http://s3.amazon.com/thumbnail3.jpg
-                + small: http://s3.amazon.com/small3.jpg
-                + medium: http://s3.amazon.com/medium3.jpg
-                + large: http://s3.amazon.com/large3.jpg
-        + messages (array)
-
-
-### Update an individual's communication settings for multiple groups [PUT /individuals/{id}/groups]
-
-+ Parameters
-    + id: 1 (number) - ID of the individual
-
-+ Request (application/json)
-    + Headers
-        Accept: application/vnd.ccbchurch.v2+json
-    + Attributes (array)
-        + (IndividualGroupsRequestWithId)
-            + id: 5 (number) - group_id
-            + receive_sms: true (boolean)
-
-+ Response 200 (application/json)
-    + Attributes (array)
-        + (BasicIndividualGroupsProfileWithGroup)
-            + group_id: 5 (number)
-            + individual_id: 1 (number)
-            + status: MEMBER (string)
-            + receive_sms: true (boolean)
-            + group (BasicGroupProfile)
-                + id: 5 (number)
-                + name: `Sunday Morning Worship Team` (string)
-                + description: `The worship team for sunday morning worship.` (string)
-                + image (Image)
-                    + thumbnail: http://s3.amazon.com/thumbnail3.jpg
-                    + small: http://s3.amazon.com/small3.jpg
-                    + medium: http://s3.amazon.com/medium3.jpg
-                    + large: http://s3.amazon.com/large3.jpg
-            + messages (array)
 
 
 ## Data Structures
