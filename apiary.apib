@@ -170,12 +170,27 @@ These services will manage the group's members.
                     + medium: http://s3.amazon.com/medium3.jpg
                     + large: http://s3.amazon.com/large3.jpg
 
+### Remove group member [DELETE]
+
++ Parameters
+    + id: `1` (number) - ID of the group
+    + individual_id: `3` (number) - ID of the member
+
++ Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+
 ### Remove group members [DELETE]
 
 + Parameters
     + id: `1` (number) - ID of the group
 
 + Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
     + Attributes
         + ids: 1,2,3 (array[number]) - The individual ids to remove
 
