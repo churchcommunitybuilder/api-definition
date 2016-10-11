@@ -1,4 +1,5 @@
 FORMAT: 1A
+HOST: http://dev.local
 
 # Church Community Builder API
 
@@ -281,7 +282,7 @@ These services will gather and set information associated to an individual.
             + individual_id: 1 (number)
             + status: MEMBER (string)
             + receive_sms: true (boolean)
-            + group (BasicGroupProfile)
+            + group (BasicGroupSerializer)
                 + id: 5 (number)
                 + name: `Sunday Morning Worship Team` (string)
                 + description: `The worship team for sunday morning worship.` (string)
@@ -311,7 +312,7 @@ These services will gather and set information associated to an individual.
         + individual_id: 1 (number)
         + status: MEMBER (string)
         + receive_sms: true (boolean)
-        + group (BasicGroupProfile)
+        + group (BasicGroupSerializer)
             + id: 5 (number)
             + name: `Sunday Morning Worship Team` (string)
             + description: `The worship team for sunday morning worship.` (string)
@@ -343,7 +344,7 @@ These services will gather and set information associated to an individual.
             + individual_id: 1 (number)
             + status: MEMBER (string)
             + receive_sms: true (boolean)
-            + group (BasicGroupProfile)
+            + group (BasicGroupSerializer)
                 + id: 5 (number)
                 + name: `Sunday Morning Worship Team` (string)
                 + description: `The worship team for sunday morning worship.` (string)
@@ -886,10 +887,10 @@ These services will manage the individual domain.
 ### IndividualProfile (BasicIndividualProfile)
 + listed: true (boolean)
 
-### BasicGroupProfile
-+ id (number)
-+ name (string)
-+ description (string)
+### BasicGroupSerializer
++ id: 1 (number) - The id of the group
++ name: Sunday Morning Worship Team (string) - The name of the group
++ description: The worship team for Sunday morning worship. (string) - The description of the group. May contain HTML.
 + image (Image)
 
 ### IndividualGroupsRequest
@@ -913,10 +914,10 @@ These services will manage the individual domain.
 + individual (BasicIndividualProfile)
 
 ### BasicIndividualGroupsProfileWithGroup (BasicIndividualGroupsProfileWithAction)
-+ group (BasicGroupProfile)
++ group (BasicGroupSerializer)
 
 ### IndividualGroupsProfile (BasicIndividualGroupsProfileWithAction)
-+ group (BasicGroupProfile, optional)
++ group (BasicGroupSerializer, optional)
 + individual (BasicIndividualProfile, optional)
 
 ### IndividualProfileRequest
