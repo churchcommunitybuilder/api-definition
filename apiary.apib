@@ -282,16 +282,14 @@ These services will gather and set information associated to an individual.
             + individual_id: 1 (number)
             + status: MEMBER (string)
             + receive_sms: true (boolean)
+            + messages (array[string])
+            + actions (object)
+                + canEditIndividualGroupCommunicationSettings (Action)
+                    + allowed: true (boolean)
             + group (BasicGroupSerializer)
                 + id: 5 (number)
                 + name: `Sunday Morning Worship Team` (string)
                 + description: `The worship team for sunday morning worship.` (string)
-                + image (Image)
-                    + thumbnail: http://s3.amazon.com/thumbnail3.jpg
-                    + small: http://s3.amazon.com/small3.jpg
-                    + medium: http://s3.amazon.com/medium3.jpg
-                    + large: http://s3.amazon.com/large3.jpg
-            + messages (array)
 
 
 ### Update an individual's communication settings for a single group [PUT /individuals/{id}/groups/{group_id}]
