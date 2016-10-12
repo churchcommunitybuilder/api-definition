@@ -7,6 +7,24 @@ HOST: http://dev.local
 
 These services will manage the groups domain.
 
+## Group list [/groups]
+
+These services retrieve lists of groups
+
+#### List all groups [GET]
+Returns an array of groups using BasicGroupSerializer
+
++ Parameters
+    + name: news (string, optional) - Optionally filter groups based on the group name containing the value provided
+
++ Request
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicGroupSerializer)
+
 ## Group members [/groups/{id}/members]
 
 These services will manage the group's members.
@@ -888,8 +906,21 @@ These services will manage the individual domain.
 ### BasicGroupSerializer
 + id: 1 (number) - The id of the group
 + name: Sunday Morning Worship Team (string) - The name of the group
-+ description: The worship team for Sunday morning worship. (string) - The description of the group. May contain HTML.
-+ image (Image)
++ images (Image)
++ campus (CampusReferenceSerializer)
++ interaction_type: MEMBERSINTERACT, ANNOUNCEONLY, ADMINISTRATIVE (enum)
++ group_type (LookupObjectSerializer)
++ membership_type: OPENTOALL, REQUESTREQUIRED (enum)
+
+### LookupObjectSerializer
++ id: 4 (number) - The id of the value
++ name: Thing One (string) - The name of the value
+
+### CampusReferenceSerializer
++ id: 1 (number) - The id of the campus
++ name: User Experience Campus (string) - The name of the campus
++ locale: en_US (string) - The locale where the campus is located
++ timezone: America/Denver - The timezone where the campus is located
 
 ### IndividualGroupsRequest
 + receive_sms: true (boolean)
