@@ -882,6 +882,35 @@ These services will manage the individual domain.
         + confirmed_no_allergies: false (boolean)
         + barcode (string)
 
+### Individual details [GET /individuals/{id}]
+
++ Parameters
+    + id: 1 (number) - ID of the individual
+
++ Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (IndividualProfile)
+        + id: 1 (number)
+        + first_name: First (string)
+        + last_name: Last (string)
+        + `family_position`: PRIMARY_CONTACT (string)
+        + marital_status: MARRIED (string)
+        + gender: `NOT_SPECIFIED` (string)
+        + birthday: 1981-03-29 (string)
+        + email: test@test.com (string)
+        + phone (Phone)
+            + mobile: +18888888888 (string)
+            + mobile_provider (object)
+                + id: 5 (number)
+                + name: Verizon (string)
+            + home: +188888888887 (string)
+            + work: +188888888886 (string)
+        + allergies (string)
+        + confirmed_no_allergies: false (boolean)
+        + barcode (string)
 
 ### Edit individual [PUT /individuals/{id}]
 
@@ -943,6 +972,19 @@ These services will manage the individual domain.
 
 + Response 200 (application/json)
     + Attributes (IndividualProfile)
+
+### Individual social networks [GET /individuals/{id}/social_networks]
+
++ Parameters
+    + id: 1 (number) - ID of the individual
+
++ Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicIndividualSocialNetworkSerializer)
 
 # Group Session
 
@@ -1172,3 +1214,7 @@ These services will manage the user's logged in status.
 
 ### MeDetailsSerializer (IndividualProfile)
 + analytics_user_types (array[string]) - The analytics labels.
+
+### BasicIndividualSocialNetworkSerializer
++ type: Facebook (string)
++ url: http://www.facebook.com/username (string)
