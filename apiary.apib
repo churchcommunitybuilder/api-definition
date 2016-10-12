@@ -295,20 +295,28 @@ These services will gather and set information associated to an individual.
 
 + Response 200 (application/json)
     + Attributes (array)
-        + (BasicIndividualGroupsProfileWithGroup)
-            + group_id: 5 (number)
+        + IndividualGroupsProfileSerializer
             + individual_id: 1 (number)
-            + status: MEMBER (string)
+            + group_id: 5 (number)
+            + receive_comments: true (boolean)
+            + receive_digests: true (boolean)
+            + receive_emails: true (boolean)
             + receive_sms: true (boolean)
-            + messages (array[Message])
+            + status: MEMBER (string)
+            + messages: [] (array[Message])
             + actions (object)
                 + canEditIndividualGroupCommunicationSettings (Action)
                     + allowed: true (boolean)
-            + group (BasicGroupSerializer)
+                    + reasons: [] (array[string])
+            + group (BasicGroupProfileSerializer)
                 + id: 5 (number)
                 + name: `Sunday Morning Worship Team` (string)
                 + description: `The worship team for sunday morning worship.` (string)
-
+            + individual (BasicIndividualProfileSerializer)
+                + id: 1 (number)
+                + name: Basic User (string)
+                + first_name: Basic (string)
+                + last_name: User (string)
 
 ### Update an individual's communication settings for a single group [PUT /individuals/{id}/groups/{group_id}]
 
@@ -890,7 +898,7 @@ These services will manage the individual domain.
 
 ### Action
 + allowed: true (boolean)
-+ reasons (array[string])
++ reasons: (array[string])
 
 ### BasicIndividualProfile
 + id: 1 (number)
@@ -921,6 +929,35 @@ These services will manage the individual domain.
 + name: User Experience Campus (string) - The name of the campus
 + locale: en_US (string) - The locale where the campus is located
 + timezone: America/Denver - The timezone where the campus is located
+
+### BasicGroupProfileSerializer
++ id: 1 (number)
++ name: Sunday Morning Worship Team (string)
++ description: The worship team for Sunday morning worship. (string)
++ campus: (object)
+    + name: Beta Campus (string)
++ group_type: (object)
+    + id: 1 (number) - Group type id
+    + name: Small Group (string)
++ images: (Image)
+
+### BasicCampusSerializer
++ id: 1 (number) - The id of the campus
++ name: Church Campus (string) - The name of the campus
++ timezone: (string)
++ locale: en_US (string)
++ order: 1 (number) - The numeric sort order of the campus
++ country: US (string) - The country code of the campus
+
+### CampusReferenceSerializer
++ id: 1 (number) - The id of the campus
++ name: Church Campus (string) - The name of the campus
++ timezone: (string)
++ locale: en_US (string)
+
+### ListItem
++ id: 1 (number) - List item id
++ name: Hello world (string) - List item name/text
 
 ### IndividualGroupsRequest
 + receive_sms: true (boolean)
@@ -993,3 +1030,10 @@ These services will manage the individual domain.
 
 ### FamilyProfileRequest (BasicFamilyProfileRequest)
 + members (array[IndividualProfileRequest])
+
+### BasicIndividualProfileSerializer
++ id (string)
++ name: (string)
++ first_name: (string)
++ last_name: (string)
++ images (Image)
