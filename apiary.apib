@@ -3,6 +3,81 @@ HOST: http://dev.local
 
 # Church Community Builder API
 
+# Group Church
+
+These services will manage lookup data for the church and campuses.
+
+# Church [/church]
+
+### Church details [GET]
+
++ Request
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (BasicChurchSerializer)
+
+### Campuses list [GET /church/campuses]
+
++ Request
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicCampusSerializer)
+
+### Countries list [GET /church/countries]
+
++ Request
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicCountrySerializer)
+
+### Mobile carriers list [GET /church/mobile_carriers]
+
++ Request
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicMobileCarrierSerializer)
+
+### Schools list [GET /church/schools]
+
++ Request
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicSchoolSerializer)
+
+### School grades list [GET /church/school_grades]
+
++ Request
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicSchoolGradeSerializer)
+
+### Social networks list [GET /church/social_networks]
+
++ Request
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (BasicSocialNetworkSerializer)
+
 # Group Groups
 
 These services will manage the groups domain.
@@ -872,6 +947,35 @@ These services will manage the individual domain.
 
 ## Data Structures
 
+### BasicChurchSerializer
++ id: 1000 (number)
++ name: The Church (string) - The church's name
++ features: (array[string]) - The enabled features
+
+### BasicCountrySerializer
++ iso: US (string)
++ iso3: USA (string)
++ name: UNITED STATES (string)
++ display_name: United States (string)
+
+### BasicMobileCarrierSerializer
++ id: 1 (number)
++ name: Sprint (string)
++ major: true (boolean)
+
+### BasicSchoolSerializer
++ id: 1 (number)
++ name: Elementary School (string)
+
+### BasicSchoolGradeSerializer
++ id: 1 (number)
++ name: 1st Grade (string)
+
+### BasicSocialNetworkSerializer
++ id: 1 (number)
++ type: Facebook (string)
++ url: http://www.facebook.com/%s (string)
+
 ### Phone
 + mobile: +18888888888 (string)
 + mobile_provider (object)
@@ -944,9 +1048,8 @@ These services will manage the individual domain.
 ### BasicCampusSerializer
 + id: 1 (number) - The id of the campus
 + name: Church Campus (string) - The name of the campus
-+ timezone: (string)
++ timezone: America/Denver (string)
 + locale: en_US (string)
-+ order: 1 (number) - The numeric sort order of the campus
 + country: US (string) - The country code of the campus
 
 ### ListItem
