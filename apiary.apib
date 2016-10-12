@@ -944,6 +944,41 @@ These services will manage the individual domain.
 + Response 200 (application/json)
     + Attributes (IndividualProfile)
 
+# Group Session
+
+These services will manage the user's logged in status.
+
+# Session
+
+### Me [GET /me]
+
++ Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (MeDetailsSerializer)
+
+### Login [POST /login]
+
++ Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+    + Attributes
+        + username (string)
+        + password (string)
+
++ Response 200 (application/json)
+    + Attributes (MeDetailsSerializer)
+
+### Logout [POST /logout]
+
++ Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+
 
 ## Data Structures
 
@@ -1134,3 +1169,6 @@ These services will manage the individual domain.
 + first_name: (string)
 + last_name: (string)
 + images (Image)
+
+### MeDetailsSerializer (IndividualProfile)
++ analytics_user_types (array[string]) - The analytics labels.
