@@ -86,7 +86,7 @@ These services will manage the groups domain.
 
 These services retrieve lists of groups
 
-#### List all groups [GET]
+### List all groups [GET]
 Returns an array of groups using BasicGroupSerializer
 
 + Parameters
@@ -99,6 +99,23 @@ Returns an array of groups using BasicGroupSerializer
 + Response 200 (application/json)
     + Attributes (array)
         + (BasicGroupSerializer)
+
+
+## Group details [/groups/{id}]
+
+These services manage a single group
+
+### Get group details [GET]
+
++ Parameters
+    + id: 1 (number) - ID of the group
+
++ Request
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+
++ Response 200 (application/json)
+    + Attributes (FullGroupSerializer)
 
 ## Group members [/groups/{id}/members]
 
@@ -826,6 +843,40 @@ These services will manage the user's logged in status.
 + interaction_type: MEMBERSINTERACT, ANNOUNCEONLY, ADMINISTRATIVE (enum)
 + group_type (LookupObjectSerializer)
 + membership_type: OPENTOALL, REQUESTREQUIRED (enum)
++ actions (object)
+    + can_join_group (Action)
+    + can_leave_group (Action)
+
+### FullGroupSerializer (BasicGroupSerializer)
++ address (AddressSerializer)- The meeting address for this group
++ area (LookupObjectSerializer) - The area where this group is located
++ childcare: true (boolean) - Is childcare available for group events?
++ description: This is a group for people to get to know each other and God (string) - The description of the group. May contain HTML.
++ full: true (boolean) - Has the group reached its capacity?
++ listed: true (boolean) - Is the group visible to public searches
++ main_leader (IndividualReferenceSerializer) - The person designated as the primary contact for the group.
++ meet_day (LookupObjectSerializer)
++ meet_time (LookupObjectSerializer)
++ member_count: 1024 (number) - The number of active individuals in the group
++ actions (object)
+    + can_join_group (Action)
+    + can_leave_group (Action)
+    + can_view_group_member_list (Action)
+
+### AddressSerializer
++ street: 1234 Main Street (string) - The street address of the address
++ city: Springfield (string) - The city where the address is located
++ state: MA (string) - The state where the address is located
++ zip: 01101 (string) - The postal code for the address
++ longitude: 42.101389 (number) - The latitude value for the address
++ latitude: `-72.590278` (number) - The longitude value for the address
+
+### IndividualReferenceSerializer
++ id: 4 (number) - The id of the individual
++ name: Jillian Jones (string) - The name of the individual
++ first_name: Jillian (string) - The first name of the individual
++ last_name: Jones (string) - The last name of the individual
++ images (Image)
 
 ### LookupObjectSerializer
 + id: 4 (number) - The id of the value
