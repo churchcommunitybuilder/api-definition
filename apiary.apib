@@ -145,16 +145,8 @@ These services will manage the group's members.
                 + name: Wayne Gretzky
                 + first_name: Wayne
                 + last_name: Gretzky
-                + phone (Phone)
-                    + mobile: +18888889999
-                    + mobile_provider:
-                        + id: 99
-                        + name: Rogers Wireless
-                + image (Image)
-                    + thumbnail: http://s3.amazon.com/thumbnail99.jpg
-                    + small: http://s3.amazon.com/small99.jpg
-                    + medium: http://s3.amazon.com/medium99.jpg
-                    + large: http://s3.amazon.com/large99.jpg
+                + campus_id: 99
+                + email: the.great.one@gmail.com
         + (BasicIndividualGroupsProfileWithActionSerializer)
             + group_id: 5
             + individual_id: 1
@@ -164,14 +156,8 @@ These services will manage the group's members.
                 + name: Joe Tester
                 + first_name: Joe
                 + last_name: Tester
-                + phone (Phone)
-                    + home: +17195553938
-                    + mobile: +17195553939
-                + image (Image)
-                    + thumbnail: http://s3.amazon.com/thumbnail1.jpg
-                    + small: http://s3.amazon.com/small1.jpg
-                    + medium: http://s3.amazon.com/medium1.jpg
-                    + large: http://s3.amazon.com/large1.jpg
+                + campus_id: 1
+                + email: joe.tester@aol.com
         + (BasicIndividualGroupsProfileWithActionSerializer)
             + group_id: 5
             + individual_id: 3
@@ -190,11 +176,8 @@ These services will manage the group's members.
                 + name: John Tester
                 + first_name: John
                 + last_name: Tester
-                + image (Image)
-                    + thumbnail: http://s3.amazon.com/thumbnail3.jpg
-                    + small: http://s3.amazon.com/small3.jpg
-                    + medium: http://s3.amazon.com/medium3.jpg
-                    + large: http://s3.amazon.com/large3.jpg
+                + campus_id: 2
+                + email: john.tester@prodigy.com
 
 ### Add group members [POST /groups/{id}/members/{action}]
 
