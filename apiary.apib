@@ -409,7 +409,7 @@ These services will gather and set information associated to an individual.
             + id: 5 (number)
             + name: `Sunday Morning Worship Team` (string)
             + description: `The worship team for sunday morning worship.` (string)
-            + image (Image)
+            + images (Image)
                 + thumbnail: http://s3.amazon.com/thumbnail3.jpg
                 + small: http://s3.amazon.com/small3.jpg
                 + medium: http://s3.amazon.com/medium3.jpg
@@ -440,7 +440,6 @@ These services will gather and set information associated to an individual.
             + group (BasicGroupSerializer)
                 + id: 5 (number)
                 + name: `Sunday Morning Worship Team` (string)
-                + description: `The worship team for sunday morning worship.` (string)
                 + image (Image)
                     + thumbnail: http://s3.amazon.com/thumbnail3.jpg
                     + small: http://s3.amazon.com/small3.jpg
@@ -833,12 +832,12 @@ These services will manage the user's logged in status.
 
 ### BasicGroupSerializer
 + id: 1 (number) - The id of the group
++ campus_id: 1 (number) - The id of the campus
 + name: Sunday Morning Worship Team (string) - The name of the group
-+ images (Image)
-+ campus (CampusReferenceSerializer)
-+ interaction_type: MEMBERSINTERACT, ANNOUNCEONLY, ADMINISTRATIVE (enum)
 + group_type (LookupObjectSerializer)
-+ membership_type: OPENTOALL, REQUESTREQUIRED (enum)
++ interaction_type: MEMBERS_INTERACT, ANNOUNCE_ONLY, ADMINISTRATIVE (enum)
++ membership_type: OPEN_TO_ALL, REQUEST_REQUIRED (enum)
++ images (Image)
 + actions (object)
     + can_join_group (Action)
     + can_leave_group (Action)
