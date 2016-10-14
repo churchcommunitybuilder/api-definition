@@ -117,14 +117,18 @@ These services manage a single group
 + Response 200 (application/json)
     + Attributes (FullGroupSerializer)
 
-## Group members [/groups/{id}/members]
+## Group members [/groups/{id}/members{?page,per_page}]
 
 These services will manage the group's members.
 
 ### Group members list [GET]
 
 + Parameters
-    + id: `1` (number) - ID of the group
+    + id: 1 (number, required) - ID of the group
+    + page: (number, optional) - page of data to fetch
+        + default: 1
+    + per_page: (number, optional) - number of items per page
+        + default: 25
 
 + Request
     + Headers
@@ -132,54 +136,55 @@ These services will manage the group's members.
 
 + Response 200 (application/json)
     + Attributes (array)
-        + (BasicIndividualGroupsProfileWithIndividual)
+        + (BasicIndividualGroupsProfileWithActionSerializer)
+            + group_id: 5
+            + individual_id: 99
+            + status: MEMBER
+            + individual (BasicIndividualProfileSerializer)
+                + id: 99
+                + name: Wayne Gretzky
+                + first_name: Wayne
+                + last_name: Gretzky
+                + phone (Phone)
+                    + mobile: +18888889999
+                    + mobile_provider:
+                        + id: 99
+                        + name: Rogers Wireless
+                + image (Image)
+                    + thumbnail: http://s3.amazon.com/thumbnail99.jpg
+                    + small: http://s3.amazon.com/small99.jpg
+                    + medium: http://s3.amazon.com/medium99.jpg
+                    + large: http://s3.amazon.com/large99.jpg
+        + (BasicIndividualGroupsProfileWithActionSerializer)
             + group_id: 5
             + individual_id: 1
             + status: MEMBER
             + individual (BasicIndividualProfileSerializer)
-                + id: 1 (number)
+                + id: 1
                 + name: Joe Tester
                 + first_name: Joe
                 + last_name: Tester
+                + phone (Phone)
+                    + home: +17195553938
+                    + mobile: +17195553939
                 + image (Image)
                     + thumbnail: http://s3.amazon.com/thumbnail1.jpg
                     + small: http://s3.amazon.com/small1.jpg
                     + medium: http://s3.amazon.com/medium1.jpg
                     + large: http://s3.amazon.com/large1.jpg
-            + messages (array[string])
+        + (BasicIndividualGroupsProfileWithActionSerializer)
+            + group_id: 5
+            + individual_id: 3
+            + status: LEADER
             + actions (object)
                 + canRemoveMember (Action)
-                    + allowed: true (boolean)
+                    + allowed: false
                     + reasons (array[string])
+                        + `MAIN_GROUP_LEADER`
                 + canChangeToMember (Action)
-                    + allowed: true (boolean)
+                    + allowed: false
                     + reasons (array[string])
-        + (BasicIndividualGroupsProfileWithIndividual)
-            + group_id: 5 (number)
-            + individual_id: 2 (number)
-            + status: MEMBER (string)
-            + individual (BasicIndividualProfileSerializer)
-                + id: 2 (number)
-                + name: Jane Tester
-                + first_name: Jane
-                + last_name: Tester
-                + image (Image)
-                   + thumbnail: http://s3.amazon.com/thumbnail2.jpg
-                   + small: http://s3.amazon.com/small2.jpg
-                   + medium: http://s3.amazon.com/medium2.jpg
-                   + large: http://s3.amazon.com/large2.jpg
-            + messages (array[string])
-            + actions (object)
-                + canRemoveMember (Action)
-                    + allowed: true (boolean)
-                    + reasons (array[string])
-                + canChangeToMember (Action)
-                    + allowed: true (boolean)
-                    + reasons (array[string])
-        + (BasicIndividualGroupsProfileWithIndividual)
-            + group_id: 5 (number)
-            + individual_id: 3 (number)
-            + status: LEADER (string)
+                        + `MAIN_GROUP_LEADER`
             + individual (BasicIndividualProfileSerializer)
                 + id: 3 (number)
                 + name: John Tester
@@ -190,16 +195,6 @@ These services will manage the group's members.
                     + small: http://s3.amazon.com/small3.jpg
                     + medium: http://s3.amazon.com/medium3.jpg
                     + large: http://s3.amazon.com/large3.jpg
-            + messages (array[string])
-            + actions (object)
-                + canRemoveMember (Action)
-                    + allowed: false (boolean)
-                    + reasons (array[string])
-                        + `MAIN_GROUP_LEADER`
-                + canChangeToMember (Action)
-                    + allowed: false (boolean)
-                    + reasons (array[string])
-                        + `MAIN_GROUP_LEADER`
 
 ### Add group members [POST /groups/{id}/members/{action}]
 
@@ -223,7 +218,7 @@ These services will manage the group's members.
         + (BasicIndividualGroupsProfileWithIndividual)
             + group_id: 5 (number)
             + individual_id: 1 (number)
-            + status: MEMBER (string)
+            + status: MEMBER
             + individual (BasicIndividualProfileSerializer)
                 + id: 1 (number)
                 + name: Joe Tester
@@ -237,7 +232,7 @@ These services will manage the group's members.
         + (BasicIndividualGroupsProfileWithIndividual)
             + group_id: 5 (number)
             + individual_id: 2 (number)
-            + status: MEMBER (string)
+            + status: MEMBER
             + individual (BasicIndividualProfileSerializer)
                 + id: 2 (number)
                 + name: Jane Tester
@@ -292,17 +287,17 @@ These services will manage the group's members.
         + (BasicIndividualGroupsProfile)
             + group_id: 5 (number)
             + individual_id: 1 (number)
-            + status: REMOVED (string)
+            + status: REMOVED
             + messages (array)
         + (BasicIndividualGroupsProfile)
             + group_id: 5 (number)
             + individual_id: 2 (number)
-            + status: REMOVED (string)
+            + status: REMOVED
             + messages (array)
         + (BasicIndividualGroupsProfileWithAction)
             + group_id: 5 (number)
             + individual_id: 3 (number)
-            + status: LEADER (string)
+            + status: LEADER
             + messages (array)
             + actions (object)
                 + canRemoveMember (Action)
@@ -756,11 +751,12 @@ These services will manage the user's logged in status.
 + url: http://www.facebook.com/%s (string)
 
 ### Phone
-+ mobile: +18888888888 (string)
-+ mobile_provider (object)
++ mobile: +18888888888 (string, optional)
++ mobile_provider (object, optional)
     + id: 5 (number)
-+ home: +18888888887 (string)
-+ work: +18888888886 (string)
+    + name: Verizon (string)
++ home: +18888888887 (string, optional)
++ work: (string, optional)
 
 ### PhoneRequest
 + mobile: +18888888888 (string)
@@ -919,7 +915,7 @@ These services will manage the user's logged in status.
 ### BasicIndividualGroupsProfile
 + individual_id: 1 (number)
 + group_id: 5 (number)
-+ status: REMOVED, MEMBER, LEADER (enum)
++ status: REQUESTING, LEADER, MEMBER, INVITED, REMOVED (enum)
 + receive_sms: true (boolean)
 + messages (array[Message])
 
@@ -965,6 +961,20 @@ These services will manage the user's logged in status.
 
 ### FamilyProfileRequest (BasicFamilyProfileRequest)
 + members (array[EditIndividualProfileRequest])
+
+### IndividualGroupStatusSerializer
++ group_id: (number)
++ individual_id: (number)
++ status: REQUESTING, LEADER, MEMBER, INVITED (enum)
+
+### BasicIndividualGroupsProfileWithActionSerializer (IndividualGroupStatusSerializer)
++ messages (array[string])
++ actions (object)
+    + canRemoveMember (Action)
+        + allowed: true (boolean)
+    + canChangeToMember (Action)
+        + allowed: true (boolean)
++ individual (BasicIndividualProfileSerializer)
 
 ### MeDetailsSerializer (IndividualDetailsSerializer)
 + analytics_user_types (array[string]) - The analytics labels.
