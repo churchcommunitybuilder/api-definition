@@ -841,16 +841,16 @@ These services will manage the user's logged in status.
     + can_leave_group (Action)
 
 ### FullGroupSerializer (BasicGroupSerializer)
-+ address (AddressSerializer)- The meeting address for this group
-+ area (LookupObjectSerializer) - The area where this group is located
-+ childcare: true (boolean) - Is childcare available for group events?
 + description: This is a group for people to get to know each other and God (string) - The description of the group. May contain HTML.
-+ full: true (boolean) - Has the group reached its capacity?
++ member_count: 1024 (number) - The number of active individuals in the group
++ childcare: true (boolean) - Is childcare available for group events?
 + listed: true (boolean) - Is the group visible to public searches
-+ main_leader (IndividualReferenceSerializer) - The person designated as the primary contact for the group.
++ full: true (boolean) - Has the group reached its capacity?
++ main_leader (BasicIndividualProfileSerializer) - The person designated as the primary contact for the group.
 + meet_day (LookupObjectSerializer)
 + meet_time (LookupObjectSerializer)
-+ member_count: 1024 (number) - The number of active individuals in the group
++ area (LookupObjectSerializer) - The area where this group is located
++ address (AddressSerializer)- The meeting address for this group
 + actions (object)
     + can_join_group (Action)
     + can_leave_group (Action)
