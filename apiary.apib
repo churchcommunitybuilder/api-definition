@@ -194,22 +194,17 @@ These services will manage the group's members.
                     + medium: http://s3.amazon.com/medium3.jpg
                     + large: http://s3.amazon.com/large3.jpg
 
-### Add group members [POST /groups/{id}/members/{action}]
+### Add group members [POST /groups/{id}/members]
 
 + Parameters
     + id: `1` (number) - ID of the group
-    + action: `add` (string) - The action to perform
-        - Members
-            + `add`
-            + `invite`
 
 + Request (application/json)
     + Headers
         Accept: application/vnd.ccbchurch.v2+json
 
     + Attributes
-        + ids: 1,2,3 (array[number]) - The individual ids to add/invite
-        + message (string,optional) - The optional invite message to include
+        + ids: 1,2,3 (array[number]) - The individual ids to add
 
 + Response 200 (application/json)
     + Attributes (array)
@@ -272,13 +267,11 @@ These services will manage the group's members.
 
 + Parameters
     + id: `1` (number) - ID of the group
+    + ids: `2,3,4` (string) - Comma separated list of individual ids to remove
 
 + Request (application/json)
     + Headers
         Accept: application/vnd.ccbchurch.v2+json
-
-    + Attributes
-        + ids: 1,2,3 (array[number]) - The individual ids to remove
 
 + Response 200 (application/json)
     + Attributes (array)
