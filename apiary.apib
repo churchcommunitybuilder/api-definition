@@ -614,12 +614,13 @@ These services will manage the individual domain.
 
 # Individuals [/individuals]
 
-### Individual Search [GET /individuals{?name}{?per_page}{?page}]
+### Individual Search [GET /individuals{?name,per_page,page,exclude%5Bgroup_ids%5D%5B%5D}]
 
 + Parameters
     + name: Last (string)
     + per_page: 10 (number) - The number of results
     + page: 1 (number) - The page number
+    + exclude%5Bgroup_ids%5D%5B%5D (array[number]) - The group ids to exclude
 
 + Request
     + Headers
