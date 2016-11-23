@@ -347,6 +347,23 @@ These services will manage the group's members.
                     + message: `Cannot change main group leader's status to member`
 
 
+## Group messages [/groups/{id}/messages]
+
+These services will manage the group's messages.
+
+### Add group message [POST /groups/{id}/messages]
+
++ Parameters
+    + id: `1` (number) - ID of the group
+
++ Request (application/json)
+    + Headers
+        Accept: application/vnd.ccbchurch.v2+json
+    + Attributes (CreateGroupMessageRequest)
+
++ Response 200 (application/json)
+    + Attributes (GroupMessagesSerializer)
+
 ## Individual's Groups [/individuals]
 
 These services will gather and set information associated to an individual.
@@ -980,3 +997,35 @@ These services will manage the user's logged in status.
 ### BasicIndividualSocialNetworkSerializer
 + type: Facebook (string)
 + url: http://www.facebook.com/username (string)
+
+### CreateGroupMessageRequest
++ from: (object, required)
+    + id: 11 (number)
+    + name: Mark Messier (string)
+    + email: mark.messier@nhl.com (string)
++ send_to: (enum, required)
+    + `ALL_PARTICIPANTS`
+    + `LEADERS_ONLY`
+//    + `SPECIFIC_PARTICIPANTS`
++ reply_to: (enum, optional)
+    + `DEFAULT`
+    + `ONLY_ME`
+    + `NO_ONE`
++ title: Message Title (string, required)
++ body: Message body. (string, required)
++ pin: (boolean, optional) - default is `false`
+
+### GroupMessagesSerializer
++ id: 777 (number)
++ title: `Some great title!` (string)
++ body: `Here is a really great sample message.` (string)
++ view_count: 2 (number)
++ display_first: false (boolean)
++ locked: false (boolean)
++ order_by: 1 (number)
++ external_listed: false (boolean)
++ listed: true (boolean)
++ creator_id: 0 (number)
++ modifier_id: 0 (number)
++ date_created: `2016-01-01 13:00:00` (string)
++ date_modified: `2016-02-02 17:59:59` (string)
